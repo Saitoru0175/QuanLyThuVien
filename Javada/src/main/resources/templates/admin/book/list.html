@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8">
+  <title>My Book List</title>
+  <th:block th:replace="/admin/admin_layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="/admin/admin_layout :: header"></th:block>
+<div class="container">
+  <h1><strong>List Book</strong></h1>
+  <form action="/admin/searchlist" method="get">
+    <input type="text" id="tensach" name="tensach" placeholder="Tìm kiếm sách...">
+    <button>Tìm kiếm</button>
+  </form>
+  <a th:href="@{/admin/addBook}" class="btn btn-outline-success">Add</a>
+  <table class="table">
+    <tr>
+      <th>Ma Sach</th>
+      <th>Ten Sach</th>
+      <th>Tac Gia</th>
+      <th>Nam Xuat Ban</th>
+      <th>The Loai</th>
+      <th>Hinh Anh</th>
+      <th>Action</th>
+    </tr>
+    <tr th:each="book : ${book}">
+      <td th:text="${book.masach}"></td>
+      <td th:text="${book.tensach}"></td>
+      <td th:text="${book.tacgia}"></td>
+      <td th:text="${book.namxb}"></td>
+      <td th:text="${book.category.tentheloai}"></td>
+      <!--<td th:src="${book.hinhanh}"></td>-->
+      <td>
+        <img th:src="@{${book.hinhanh}}" class="img-thumbnail" alt="Book Image" style="width: 70px; height: 70px;">
+      </td>
+      <td sec:authorize="hasAnyAuthority('admin')">
+        <a th:href="@{/admin/editBook/{masach}(masach=${book.masach})}" class="btn btn-outline-primary" >Edit</a>
+        <a th:href="@{/admin/delBook/{masach}(masach=${book.masach})}" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger" >Delete</a>
+      </td>
+    </tr>
+  </table>
+</div>
+<th:block th:replace="/admin/admin_layout :: footer"></th:block>
+</body>
+</html>

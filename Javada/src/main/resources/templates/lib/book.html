@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>My Book List</title>
+  <th:block th:replace="/lib/libray_layout :: link-css"></th:block>
+  <link href="/css/suku.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:replace="/lib/libray_layout :: header"></th:block>
+<div class="container">
+  <h1 style="align: center;"><strong>CÁC LOẠI SÁCH</strong></h1>
+</div>
+<div class="container">
+  <!-- Phần tìm kiếm sách -->
+  <div class="search-container">
+    <div class="search-box">
+      <form action="/book" method="get">
+        <input type="text" id="tensach" name="tensach" placeholder="Tìm kiếm sách...">
+        <button>Tìm kiếm</button>
+      </form>
+    </div>
+
+    <div class="category-container">
+      <select id="category-select" onchange="handleChange(this)">
+        <option value="">--Thể Loại--</option>
+        <th:block th:each="category : ${categories}">
+          <option th:value="@{/category/{categoryId}(categoryId=${category.matheloai})}" th:text="${category.tentheloai}"></option>
+        </th:block>
+      </select>
+      <a class="btn btn-outline-dark" href="/book">Reset</a>
+      <input type="hidden" id="current-category" th:value="${currentCategoryId}" />
+    </div>
+  </div>
+  <!-- Hiển thị sách -->
+  <div class="book-container">
+    <div class="book" th:each="book : ${books}">
+      <img th:src="${book.hinhanh}" alt="Hình ảnh sách">
+      <div class="book-info">
+        <h3 th:text="${book.tensach}"></h3>
+        <p>Tác giả: <span th:text="${book.tacgia}"></span></p>
+        <p>Thể Loại: <span th:text="${book.category.tentheloai}"></span></p>
+        <p>Năm xuất bản: <span th:text="${book.namxb}"></span></p>
+        <form sec:authorize="hasAnyAuthority('member')" th:action="@{/addToCart/{masach}(masach=${book.masach})}" method="get">
+          <input type="submit" value="Thêm vào giỏ">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pagination" th:if="${totalPages > 0}">
+  <ul>
+    <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+        th:class="${pageNumber == currentPage ? 'active' : ''}">
+      <a th:href="@{/book(page=${pageNumber}, tensach=${tensach})}" th:text="${pageNumber + 1}"></a>
+    </li>
+  </ul>
+</div>
+
+</div>
+<th:block th:replace="/lib/libray_layout :: footer"></th:block>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var currentCategoryId = document.getElementById("current-category").value;
+
+    var selectElement = document.getElementById("category-select");
+    var options = selectElement.options;
+
+    for (var i = 0; i < options.length; i++) {
+      var option = options[i];
+      if (option.text === currentCategoryId) {
+        option.selected = true;
+        break;
+      }
+    }
+  });
+
+  function handleChange(select) {
+    var selectedValue = select.value;
+    if (selectedValue !== "") {
+      window.location.href = selectedValue;
+    }
+  }
+</script>
+</html>

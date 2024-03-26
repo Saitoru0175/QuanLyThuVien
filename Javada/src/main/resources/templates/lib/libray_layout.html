@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+</head>
+<header th:fragment="header">
+  <nav class="navbar navbar-expand-lg" style="background-color: #c6c6c6;">
+    <p style="margin-left: 130px;">DC: 123 Phường 23, Quận Bình Thạnh, TPHCM</p>
+    <p>Tel: 029 275 2476</p>
+    <p>Mail: mr.trung18@gmail.com</p>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <img class="navbar-brand" src="/img/LibRaryCity.jpg" alt="Logo" style="width: 15%; height: 15%;" onclick="redirectToHomePage()">
+      <script>
+  function redirectToHomePage() {
+    window.location.href = "/";
+  }
+</script>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="btn btn-outline-dark" aria-current="page" href="/">Trang Chủ</a></li>
+          <li class="nav-item"><a class="btn btn-outline-dark" href="/about">Về Chúng Tôi</a></li>
+          <li class="nav-item"><a class="btn btn-outline-dark" href="/book">Sách</a></li>
+          <li class="nav-item"><a class="btn btn-outline-dark" href="/contact">Liên Hệ</a></li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <!--<li class="nav-item"><a class="btn btn-outline-dark" href="/cart">Giỏ</a></li>-->
+          <li class="nav-item">
+            <a class="btn btn-outline-dark" href="/cart">
+              Giỏ<span class="badge badge-pill badge-primary" th:if="${bookCart != null}" th:text="${#lists.size(bookCart.items)}"></span>
+            </a>
+          </li>
+
+          <li sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+              <button class="btn btn-outline-danger" type="submit">Logout</button>
+              <a sec:authorize="hasAnyAuthority('admin')" class="btn btn-outline-dark" href="/admin"><strong>Admin</strong></a>
+            </form>
+          </li>
+          <li sec:authorize="!isAuthenticated()">
+          <a class="btn btn-outline-dark" href="/login"><strong>Đăng Nhập</strong></a></li>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<div th:insert="~{::${content}">
+  <!--NOI DUNG TRANG CON -->
+</div>
+<footer th:fragment="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <img src="/img/logo.jpg" alt="Logo" style="width: 50%; height: 50%; ">
+      </div>
+      <div class="footer-section">
+        <h4>Thư viện</h4>
+        <ul>
+          <li><a th:href="@{/}">Trang chủ</a></li>
+          <li><a th:href="@{/books}">Sách</a></li>
+          <li><a th:href="@{/authors}">Tác giả</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+      <h4>Liên Hệ</h4>
+        <ul>
+          <li>DC: 123 Phường 23, Quận Bình Thạnh, TPHCM</li>
+          <li>Tel: 029 275 2476</li>
+          <li>Mail: mr.trung18@gmail.com</li>
+        </ul>
+    </div>
+      <div class="footer-section">
+        <h4>Mạng xã hội</h4>
+        <ul class="social-links">
+          <li>
+            <a href="https://facebook.com" style="color: #0060ff;">Facebook</a>
+          </li>
+          <li>
+            <a href="https://twitter.com" style="color: #0dcaf0;">Twitter</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <p>Bản quyền © 2023 Thư viện sách</p>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</footer>
+</body>
+</html>

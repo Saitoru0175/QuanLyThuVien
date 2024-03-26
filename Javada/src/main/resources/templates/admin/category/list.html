@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Book List</title>
+  <th:block th:replace="/admin/admin_layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="/admin/admin_layout :: header"></th:block>
+<div class="container">
+  <h1><strong>List Category</strong></h1>
+  <form action="/admin/searchlistcate" method="get">
+    <input type="text" id="tentheloai" name="tentheloai" placeholder="Tìm kiếm sách...">
+    <button>Tìm kiếm</button>
+  </form>
+  <a th:href="@{/admin/addCategory}" class="btn btn-outline-success">Add</a>
+  <table class="table">
+    <tr>
+      <th>Ma the Loai</th>
+      <th>Ten The Loai</th>
+      <th>Action</th>
+    </tr>
+    <tr th:each="category : ${categories}">
+      <td th:text="${category.matheloai}"></td>
+      <td th:text="${category.tentheloai}"></td>
+      <td>
+        <a th:href="@{/admin/editCategory/{matheloai}(matheloai=${category.matheloai})}" class="btn btn-outline-primary" >Edit</a>
+        <a th:href="@{/admin/delCategory/{matheloai}(matheloai=${category.matheloai})}" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger" >Delete</a>
+      </td>
+    </tr>
+  </table>
+</div>
+<th:block th:replace="/admin/admin_layout :: footer"></th:block>
+</body>
+</html>

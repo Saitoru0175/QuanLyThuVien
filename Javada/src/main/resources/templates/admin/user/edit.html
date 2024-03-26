@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Book</title>
+  <th:block th:replace="/admin/admin_layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="/admin/admin_layout :: header"></th:block>
+<div class="container">
+  <h1>Edit Book</h1>
+  <form th:action="@{/admin/editUser/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}">
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="username">MSSV :</label>
+      <input class="form-control" type="text" id="username" th:field="*{username}" required>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="password">Password :</label>
+      <input class="form-control" type="text" id="password" th:field="*{password}" required>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="name">Name :</label>
+      <input class="form-control" type="text" id="name" th:field="*{name}" required>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="email">Email :</label>
+      <input class="form-control" type="text" id="email" th:field="*{email}" required>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="diachi">diachi :</label>
+      <input class="form-control" type="text" id="diachi" th:field="*{diachi}" required>
+    </div>
+
+    <input type="submit" class="btn btn-outline-success" value="save">
+  </form>
+  <br>
+  <a th:href="@{/admin/users}" class="btn btn-outline-info">Back to List</a>
+</div>
+<th:block th:replace="/admin/admin_layout :: footer"></th:block>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Book List</title>
+    <th:block th:replace="/lib/libray_layout :: link-css"></th:block>
+    <link href="/css/suku.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:replace="/lib/libray_layout :: header"></th:block>
+<h1 th:if="${emptyCartMessage}" style="color: red;">
+    <p th:text="${emptyCartMessage}"></p>
+</h1>
+<h1>Giỏ</h1>
+
+<form>
+    <button action="/cart/export" method="GET" type="submit" class="btn btn-success">Xuất file Excel</button>
+    <button action="/clearCart" method="GET" type="submit" class="btn btn-danger">Clear</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Tên sách</th>
+        <th>Tác giả</th>
+        <th>Thể Loại</th>
+        <th>Năm Xuất bản</th>
+        <th>Số Lượng</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="item : ${cartItems}">
+        <td th:text="${item.book.tensach}"></td>
+        <td th:text="${item.book.tacgia}"></td>
+        <td th:text="${item.book.category.tentheloai}"></td>
+        <td th:text="${item.book.namxb}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td>
+            <a th:href="@{/removeFromCart/{masach}(masach=${item.book.masach})}" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger" >Delete</a>
+        </td>
+    </tr>
+    </thead>
+</table>
+<form action="/borrow" method="get" style="text-align: center" >
+    <div>
+        <input type="submit" value="Mượn sách" class="btn btn-primary btn-lg btn-block">
+    </div>
+</form>
+<th:block th:replace="/lib/libray_layout :: footer"></th:block>
+</body>
+</html>

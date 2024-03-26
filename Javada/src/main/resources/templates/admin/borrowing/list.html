@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8">
+  <title>My Book List</title>
+  <th:block th:replace="/admin/admin_layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="/admin/admin_layout :: header"></th:block>
+<div class="container">
+  <h1><strong>List Borrowing</strong></h1>
+  <!--<a th:href="@{/admin/addBook}" class="btn btn-outline-success">Add</a>-->
+  <table class="table">
+    <tr>
+      <th>Ma Phieu</th>
+      <th>MSSV</th>
+      <th>Sách</th>
+      <th>Ngày Mượn</th>
+      <th>Nơi Mượn</th>
+      <th>Trang Thai</th>
+      <th>Mượn / Trả</th>
+      <th>Action</th>
+    </tr>
+    <tr th:each="borrowing : ${borrowings}">
+      <td th:text="${borrowing.id}"></td>
+      <th th:text="${borrowing.mssv}"></th>
+      <td style="list-style: none">
+          <li th:each="book : ${borrowing.books}" th:text="${book.tensach}"></li>
+      </td>
+      <td th:text="${borrowing.borrowDate}"></td>
+      <td th:text="${borrowing.borrowLocate}"></td>
+      <td>
+        <span th:text="${borrowing.trangthai ? 'Đã xác thực' : 'Chưa xác thực'}"
+              th:style="${borrowing.trangthai ? 'color: green' : 'color: red'}"></span>
+      </td>
+      <td>
+        <span th:text="${borrowing.muontra ? 'Đã trả' : 'Chưa trả'}"
+              th:style="${borrowing.muontra ? 'color: blue' : 'color: red'}"></span>
+      </td>
+      <td sec:authorize="hasAnyAuthority('admin')">
+        <form th:action="@{/admin/toggleStatus}" method="post">
+          <input type="hidden" name="borrowingId" th:value="${borrowing.id}">
+          <button type="submit" class="btn btn-outline-success">Xác thực</button>
+        </form>
+        <form th:action="@{/admin/toggleStatuss}" method="post">
+          <input type="hidden" name="borrowingId" th:value="${borrowing.id}">
+          <button type="submit" class="btn btn-outline-primary">Mượn/Trả</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+</div>
+<th:block th:replace="/admin/admin_layout :: footer"></th:block>
+</body>
+</html>

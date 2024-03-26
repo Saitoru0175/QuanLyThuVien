@@ -1,0 +1,110 @@
+/* Thiết lập font chữ mặc định */
+body, h1, h2, h3, h4, h5, h6, p, ul, li {
+    font-family: Arial, sans-serif;
+}
+
+/* Thiết lập kích thước và màu sắc cho phần header */
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Thiết lập phần hero */
+section.hero {
+    background-image: url("hero.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: -125px;
+    margin-top: -50px;
+}
+
+.hero-content {
+    color: #000;
+}
+
+.hero-content h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Thiết lập phần features */
+section.features {
+    background-color: #f2f2f2;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.feature {
+    display: inline-block;
+    width: 30%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.feature img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.feature h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Thiết lập phần testimonials */
+section.testimonials {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.testimonial {
+    display: inline-block;
+    width: 40%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    margin: 20px;
+}
+
+.testimonial img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.testimonial p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.testimonial h4 {
+    font-size: 18px;
+}
+
+

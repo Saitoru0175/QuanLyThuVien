@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Book List</title>
+    <th:block th:replace="/admin/admin_layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="/admin/admin_layout :: header"></th:block>
+<div class="container">
+    <h1><strong>List User</strong></h1>
+    <a th:href="@{/admin/addUser}" class="btn btn-outline-success">Add</a>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>MSSV</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>DiaChi</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.diachi}"></td>
+            <td>
+                <a th:href="@{/admin/editUser/{id}(id=${user.id})}" class="btn btn-outline-primary" >Edit</a>
+                <a th:href="@{/admin/delUser/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger" >Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<th:block th:replace="/admin/admin_layout :: footer"></th:block>
+</body>
+</html>

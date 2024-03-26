@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Book</title>
+  <th:block th:replace="/admin/admin_layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="/admin/admin_layout :: header"></th:block>
+<div class="container">
+  <h1>Edit Book</h1>
+  <form th:action="@{/admin/editBook/{masach}(masach=${book.masach})}" th:object="${book}" method="post">
+    <input type="hidden" th:field="*{masach}">
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="tensach">Ten Sach :</label>
+      <input class="form-control" type="text" id="tensach" th:field="*{tensach}" required>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="tacgia">Tac Gia :</label>
+      <input class="form-control" type="text" id="tacgia" th:field="*{tacgia}" required>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="namxb">Nam Xuat Ban :</label>
+      <input class="form-control" type="number" id="namxb" th:field="*{namxb}" required>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="category">The Loai :</label>
+      <select class="form-control" id="category" th:field="*{category.matheloai}">
+        <option th:each="category : ${categories}" th:value="${category.matheloai}"
+                th:text="${category.tentheloai}"></option>
+      </select>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="hinhanh">Hinh Anh :</label>
+      <input class="form-control" type="text" id="hinhanh" th:field="*{hinhanh}" required>
+    </div>
+
+    <input type="submit" class="btn btn-outline-success" value="save">
+  </form>
+  <br>
+  <a th:href="@{/admin/books}" class="btn btn-outline-info">Back to List</a>
+</div>
+<th:block th:replace="/admin/admin_layout :: footer"></th:block>
+</body>
+</html>

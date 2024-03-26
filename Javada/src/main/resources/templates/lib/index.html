@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Book List</title>
+    <th:block th:replace="/lib/libray_layout :: link-css"></th:block>
+    <link href="/css/suku.css" rel="stylesheet">
+    <link href="/css/kuku.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:replace="/lib/libray_layout :: header"></th:block>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Xin chào!</h1>
+            <p>Chào mừng bạn đến với trang web của chúng tôi</p>
+        </div>
+    </section>
+<section class="features">
+    <div class="feature">
+        <img src="/img/ti.jpg" alt="Feature 1">
+        <h3>Tiện ích 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget urna eu lorem tempor consequat.</p>
+    </div>
+    <div class="feature">
+        <img src="/img/ti2.jpg" alt="Feature 2">
+        <h3>Tiện ích 2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget urna eu lorem tempor consequat.</p>
+    </div>
+    <div class="feature">
+        <img src="/img/ti3.jpg" alt="Feature 3">
+        <h3>Tiện ích 3</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget urna eu lorem tempor consequat.</p>
+    </div>
+</section>
+
+<section class="testimonials">
+    <h2>Phản hồi của khách hàng</h2>
+    <div class="testimonial">
+        <img src="/img/nam.jpg" alt="Customer 1">
+        <p>"Sản phẩm của bạn thật tuyệt vời! Tôi hoàn toàn hài lòng với chất lượng và dịch vụ."</p>
+        <h4>Nguyễn Văn A</h4>
+    </div>
+    <div class="testimonial">
+        <img src="/img/nu.jpg" alt="Customer 2">
+        <p>"Dịch vụ của bạn rất chuyên nghiệp và đáng tin cậy. Tôi sẽ tiếp tục hợp tác với bạn trong tương lai."</p>
+        <h4>Nguyễn Thị B</h4>
+    </div>
+</section>
+<th:block th:replace="/lib/libray_layout :: footer"></th:block>
+</body>
+</html>

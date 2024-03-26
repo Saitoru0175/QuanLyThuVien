@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Book List</title>
+    <th:block th:replace="/lib/libray_layout :: link-css"></th:block>
+    <link href="/css/suku.css" rel="stylesheet">
+    <link href="/css/kura.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:replace="/lib/libray_layout :: header"></th:block>
+<section class="hero">
+    <div class="hero-content">
+        <strong><h1>Chào Mừng Đến Với Thư Viện Của Chúng Tôi</h1>
+        <p>Thư Viện Chúng Tôi Luôn Ưu Tiên Chất Lượng Sách Là Hàng Đầu Góp Phần Đẩy Mạnh Não Bộ Thúc Đẩy Phát Triển.</p></strong>
+    </div>
+</section>
+<section class="about">
+    <div class="about-content">
+        <h2>Về Chúng Tôi</h2>
+        <p>No Thing.</p>
+        <p>No One.</p>
+
+        <h3>Nhiệm Vụ Của Chúng Tôi</h3>
+        <p>Cung Cấp Các Loại Sách Chất Lượng Giúp Phát Triển Và tìm hiểu</p>
+
+        <h3>Nhóm Chúng Tôi</h3>
+        <ul>
+            <li>Le Van Khang - CEO</li>
+            <li>Phan Phuoc Trung - COO</li>
+            <li>Nguyen Hoang Phuc - CTO</li>
+        </ul>
+    </div>
+</section>
+<th:block th:replace="/lib/libray_layout :: footer"></th:block>
+</body>
+</html>

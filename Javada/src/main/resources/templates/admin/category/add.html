@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Category</title>
+    <th:block th:replace="/admin/admin_layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="/admin/admin_layout :: header"></th:block>
+<div class="container">
+    <h1>Add Category</h1>
+    <form th:action="@{/admin/addCategory}" th:object="${category}" method="post">
+
+        <div class="col-6 mb-3">
+            <label class="form-label" for="tentheloai">Ten Sach :</label>
+            <input class="form-control" type="text" th:field="*{tentheloai}" id="tentheloai">
+            <span class="text-danger" th:if="${#fields.hasErrors('tentheloai')}" th:errors="*{tentheloai}"></span>
+        </div>
+
+        <input type="submit" class="btn btn-outline-success" value="save">
+    </form>
+    <br>
+    <a th:href="@{/admin/categories}" class="btn btn-outline-info">Back to List</a>
+</div>
+<th:block th:replace="/admin/admin_layout :: footer"></th:block>
+</body>
+</html>

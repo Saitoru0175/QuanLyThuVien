@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <th:block th:replace="/admin/admin_layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="/admin/admin_layout :: header"></th:block>
+<div class="container">
+    <h1>Add Book</h1>
+    <form th:action="@{/admin/addBook}" th:object="${book}" method="post" enctype="multipart/form-data">
+
+        <div class="col-6 mb-3">
+            <label class="form-label" for="tensach">Ten Sach :</label>
+            <input class="form-control" type="text" th:field="*{tensach}" id="tensach">
+            <span class="text-danger" th:if="${#fields.hasErrors('tensach')}" th:errors="*{tensach}"></span>
+        </div>
+
+        <div class="col-6 mb-3">
+            <label class="form-label" for="tacgia">Tac Gia :</label>
+            <input class="form-control" type="text" th:field="*{tacgia}" id="tacgia">
+            <span class="text-danger" th:if="${#fields.hasErrors('tacgia')}" th:errors="*{tacgia}"></span>
+        </div>
+
+        <div class="col-6 mb-3">
+            <label class="form-label" for="namxb">Nam Xuat Ban :</label>
+            <input class="form-control" type="text" th:field="*{namxb}" id="namxb" required>
+            <span class="text-danger" th:if="${#fields.hasErrors('namxb')}" th:errors="*{namxb}"></span>
+        </div>
+
+        <div class="col-6 mb-3">
+            <label class="form-label" for="category">The Loai :</label>
+            <select class="form-control" id="category" name="category.matheloai">
+                <option value="">-- Chon The Loai --</option>
+                <option th:each="category : ${categories}" th:value="${category.matheloai}"
+                        th:text="${category.tentheloai}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+        </div>
+
+        <div class="col-6 mb-3">
+            <label class="form-label" for="hinhanh">Hinh Anh :</label>
+            <input class="form-control" type="text" th:field="*{hinhanh}" id="hinhanh" required>
+            <span class="text-danger" th:if="${#fields.hasErrors('hinhanh')}" th:errors="*{hinhanh}"></span>
+        </div>
+
+
+        <input type="submit" class="btn btn-outline-success" value="save">
+    </form>
+    <br>
+    <a th:href="@{/admin/book}" class="btn btn-outline-info">Back to List</a>
+</div>
+<th:block th:replace="/admin/admin_layout :: footer"></th:block>
+</body>
+</html>
